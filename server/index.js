@@ -16,7 +16,7 @@ connection
   .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.send("Conectado");
 });
 
 app.listen(8080, () => {
