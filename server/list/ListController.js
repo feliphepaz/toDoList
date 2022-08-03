@@ -5,7 +5,7 @@ const List = require("./List");
 
 router.use(cors());
 
-router.post("/list", (req, res) => {
+router.get("/list", (req, res) => {
   List.findAll({ raw: true })
     .then((list) => {
       res.send(list);
@@ -17,9 +17,11 @@ router.post("/list", (req, res) => {
 
 router.post("/list/register", (req, res) => {
   const message = req.body.message;
+  const completed = req.body.completed;
   if (message) {
     List.create({
       message,
+      completed,
     })
       .then(() => {
         res.sendStatus(200);
@@ -50,12 +52,14 @@ router.put("/list/delete", (req, res) => {
 
 router.put("/list/edit", (req, res) => {
   const message = req.body.message;
+  const completed = req.body.completed;
   const id = req.body.id;
   if (id) {
     List.findByPk(id)
       .then((list) => {
         list.update({
           message,
+          completed,
         });
         res.sendStatus(200);
       })

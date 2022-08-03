@@ -6,6 +6,10 @@ const List = connection.define("lista", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  completed: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+  },
 });
 
 module.exports = List;
