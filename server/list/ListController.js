@@ -17,29 +17,12 @@ router.get("/list", (req, res) => {
 
 router.post("/list/register", (req, res) => {
   const message = req.body.message;
-  const completed = req.body.completed;
   if (message) {
     List.create({
       message,
-      completed,
+      completed: 0,
     })
       .then(() => {
-        res.sendStatus(200);
-      })
-      .catch(() => {
-        res.sendStatus(404);
-      });
-  } else {
-    res.sendStatus(404);
-  }
-});
-
-router.put("/list/delete", (req, res) => {
-  const id = req.body.id;
-  if (id) {
-    List.findByPk(id)
-      .then((list) => {
-        list.destroy();
         res.sendStatus(200);
       })
       .catch(() => {
@@ -61,6 +44,22 @@ router.put("/list/edit", (req, res) => {
           message,
           completed,
         });
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(404);
+      });
+  } else {
+    res.sendStatus(404);
+  }
+});
+
+router.put("/list/delete", (req, res) => {
+  const id = req.body.id;
+  if (id) {
+    List.findByPk(id)
+      .then((list) => {
+        list.destroy();
         res.sendStatus(200);
       })
       .catch(() => {
