@@ -72,6 +72,7 @@
 
 .list li p {
   color: #012030;
+  max-width: 250px;
   margin: 0px;
 }
 
