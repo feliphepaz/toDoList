@@ -49,13 +49,16 @@ async function getList() {
 
       // Styling complete tasks
       if (item.completed) {
-        li.classList.add("completed");
+        span.classList.add("completed");
       }
     });
 
     completeButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        completeTask(button.dataset.task, 1, +button.id);
+        if (!button.classList.contains("completed")) {
+          completeTask(button.dataset.task, 1, +button.id);
+          button.classList.add("completed");
+        }
       });
     });
 
@@ -92,14 +95,11 @@ async function completeTask(
   completed: number,
   id: number
 ) {
-  const response = await axios.put("http://localhost:8080/list/edit", {
+  await axios.put("http://localhost:8080/list/edit", {
     message,
     completed,
     id,
   });
-  if (response.status === 200) {
-    window.location.reload();
-  }
 }
 
 // Delete task

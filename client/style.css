@@ -44,12 +44,12 @@
 }
 
 .list li span:hover,
-.completed span {
+.completed {
   border: 4px solid #012030;
 }
 
 .list li span:hover ~ p,
-.completed span ~ p {
+.completed ~ p {
   text-decoration: line-through;
 }
 
